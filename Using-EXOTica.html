@@ -1,0 +1,431 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using EXOTica &mdash; EXOTica 5.0-beta1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="EXOTica 5.0-beta1 documentation" href="index.html"/>
+        <link rel="next" title="Documentation" href="Documentation.html"/>
+        <link rel="prev" title="Setting up ROSlaunch" href="Setting-up-ROSlaunch.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> EXOTica
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Initialisation.html">Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Initializers.html">Initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XML.html">XML Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XML-Parsing.html">XML Parsing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Manual-Initialisation.html">Manual Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Common-Initialisation-Step.html">Common Initialisation Step</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setting-up-ROSlaunch.html">Setting up ROSlaunch</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using EXOTica</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#code-explained">Code Explained</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#solution-format">Solution Format</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#publishing-to-rviz">Publishing to RVIZ</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Code-Formatting.html">Code Formatting</a></li>
+<li class="toctree-l1"><a class="reference external" href="./doxygen_cpp/index.html#http://">Doxygen C++</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EXOTica</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Using EXOTica</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-exotica">
+<h1>Using EXOTica<a class="headerlink" href="#using-exotica" title="Permalink to this headline">¶</a></h1>
+<p>This part of the tutorial assumes that EXOTica is already initialised
+with a problem and solver fully set up and the problem sent to the
+solver.</p>
+<p>From here we can begin to use EXOTica to solve problems and produce
+motion plans. We will continue to use the exotica example found in
+<code class="docutils literal"><span class="pre">manual.cpp</span></code> as a reference, starting after initialisation is
+complete:</p>
+<div class="code c++ highlight-default"><div class="highlight"><pre><span></span>    <span class="o">...</span>
+
+    <span class="o">//</span> <span class="n">Continued</span> <span class="kn">from</span> <span class="nn">initialisation</span>
+    <span class="o">//</span> <span class="n">Create</span> <span class="n">the</span> <span class="n">initial</span> <span class="n">configuration</span>
+    <span class="n">Eigen</span><span class="p">::</span><span class="n">VectorXd</span> <span class="n">q</span> <span class="o">=</span> <span class="n">Eigen</span><span class="p">::</span><span class="n">VectorXd</span><span class="p">::</span><span class="n">Zero</span><span class="p">(</span><span class="n">any_problem</span><span class="o">-&gt;</span><span class="n">getScene</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getNumJoints</span><span class="p">());</span>
+    <span class="n">Eigen</span><span class="p">::</span><span class="n">MatrixXd</span> <span class="n">solution</span><span class="p">;</span>
+
+
+    <span class="n">ROS_INFO_STREAM</span><span class="p">(</span><span class="s2">&quot;Calling solve() in an infinite loop&quot;</span><span class="p">);</span>
+
+    <span class="n">double</span> <span class="n">t</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+    <span class="n">ros</span><span class="p">::</span><span class="n">Rate</span> <span class="n">loop_rate</span><span class="p">(</span><span class="mf">500.0</span><span class="p">);</span>
+    <span class="n">ros</span><span class="p">::</span><span class="n">WallTime</span> <span class="n">init_time</span> <span class="o">=</span> <span class="n">ros</span><span class="p">::</span><span class="n">WallTime</span><span class="p">::</span><span class="n">now</span><span class="p">();</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">ros</span><span class="p">::</span><span class="n">ok</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">ros</span><span class="p">::</span><span class="n">WallTime</span> <span class="n">start_time</span> <span class="o">=</span> <span class="n">ros</span><span class="p">::</span><span class="n">WallTime</span><span class="p">::</span><span class="n">now</span><span class="p">();</span>
+
+        <span class="o">//</span> <span class="n">Update</span> <span class="n">the</span> <span class="n">goal</span> <span class="k">if</span> <span class="n">necessary</span>
+        <span class="o">//</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">figure</span> <span class="n">eight</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">ros</span><span class="p">::</span><span class="n">Duration</span><span class="p">((</span><span class="n">ros</span><span class="p">::</span><span class="n">WallTime</span><span class="p">::</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">init_time</span><span class="p">)</span><span class="o">.</span><span class="n">toSec</span><span class="p">())</span><span class="o">.</span><span class="n">toSec</span><span class="p">();</span>
+        <span class="n">my_problem</span><span class="o">-&gt;</span><span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="mf">0.6</span><span class="p">,</span>
+                        <span class="o">-</span><span class="mf">0.1</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">M_PI</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">,</span>
+                         <span class="mf">0.5</span> <span class="o">+</span> <span class="n">sin</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="n">M_PI</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">;</span>
+
+        <span class="o">//</span> <span class="n">Solve</span> <span class="n">the</span> <span class="n">problem</span> <span class="n">using</span> <span class="n">the</span> <span class="n">IK</span> <span class="n">solver</span>
+        <span class="n">any_solver</span><span class="o">-&gt;</span><span class="n">Solve</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">solution</span><span class="p">);</span>
+
+        <span class="n">double</span> <span class="n">time</span> <span class="o">=</span> <span class="n">ros</span><span class="p">::</span><span class="n">Duration</span><span class="p">((</span><span class="n">ros</span><span class="p">::</span><span class="n">WallTime</span><span class="p">::</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span><span class="o">.</span><span class="n">toSec</span><span class="p">())</span><span class="o">.</span><span class="n">toSec</span><span class="p">();</span>
+        <span class="n">ROS_INFO_STREAM_THROTTLE</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="s2">&quot;Finished solving in &quot;</span><span class="o">&lt;&lt;</span><span class="n">time</span><span class="o">&lt;&lt;</span><span class="s2">&quot;s. Solution [&quot;</span><span class="o">&lt;&lt;</span><span class="n">solution</span><span class="o">&lt;&lt;</span><span class="s2">&quot;]&quot;</span><span class="p">);</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="n">solution</span><span class="o">.</span><span class="n">rows</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+
+        <span class="n">my_problem</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
+        <span class="n">my_problem</span><span class="o">-&gt;</span><span class="n">getScene</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getSolver</span><span class="p">()</span><span class="o">.</span><span class="n">publishFrames</span><span class="p">();</span>
+
+        <span class="n">ros</span><span class="p">::</span><span class="n">spinOnce</span><span class="p">();</span>
+        <span class="n">loop_rate</span><span class="o">.</span><span class="n">sleep</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="o">//</span> <span class="n">All</span> <span class="n">classes</span> <span class="n">will</span> <span class="n">be</span> <span class="n">destroyed</span> <span class="n">at</span> <span class="n">this</span> <span class="n">point</span><span class="o">.</span>
+<span class="p">}</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<div class="section" id="code-explained">
+<h2>Code Explained<a class="headerlink" href="#code-explained" title="Permalink to this headline">¶</a></h2>
+<p>Firstly, we must set up a vector of initial joint variables to be fed
+into the solver. Here we initialise the joints to zero angles:</p>
+<div class="code c++ highlight-default"><div class="highlight"><pre><span></span><span class="n">Eigen</span><span class="p">::</span><span class="n">VectorXd</span> <span class="n">q</span> <span class="o">=</span> <span class="n">Eigen</span><span class="p">::</span><span class="n">VectorXd</span><span class="p">::</span><span class="n">Zero</span><span class="p">(</span><span class="n">any_problem</span><span class="o">-&gt;</span><span class="n">getScene</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getNumJoints</span><span class="p">());</span>
+</pre></div>
+</div>
+<p>Here we use the kinematic description of the robot to determine the size
+of the vector (<code class="docutils literal"><span class="pre">any_problem-&gt;getScene()-&gt;getNumJoints()</span></code>). This vector
+can naturally be changed to whatever joint configuration is required for
+your motion planning purposes. for example, after instantiating <code class="docutils literal"><span class="pre">q</span></code>:</p>
+<div class="code c++ highlight-default"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">&lt;&lt;</span> <span class="n">joint_start</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">joint_start</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">joint_start</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">joint_start</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">joint_start</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span><span class="n">joint_start</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span><span class="n">joint_start</span><span class="p">[</span><span class="mi">6</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>and so on. This init joint configuration vector will be sent to the
+solver later.</p>
+<p>When we do call the solver, we will get the motion plan back as an
+n*DOF matrix, where n is the number of steps along the trajectory. A
+dynamically sized matrix container will need to be created to hold this.
+This is created in the next line:</p>
+<div class="code c++ highlight-default"><div class="highlight"><pre><span></span><span class="n">Eigen</span><span class="p">::</span><span class="n">MatrixXd</span> <span class="n">solution</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Now we have a starting point and something to hold the trajectory, we
+need somewhere to go. It’s time to set the goal.</p>
+<p>Methods of goal setting vary according to the problem and your
+requirements. Two methods exist for the IK_solver. The method used in
+the tutorial specifies the goal for all IK_solver task maps by setting
+the <code class="docutils literal"><span class="pre">y</span></code> value to the desired goal:</p>
+<div class="code c++ highlight-default"><div class="highlight"><pre><span></span>        my_problem-&gt;y &lt;&lt; 0.6,  // X Position
+                        -0.1 + sin(t * 2.0 * M_PI * 0.5) * 0.1, // Y Position
+                         0.5 + sin(t * M_PI * 0.5) * 0.2; // Z Position
+
+NOTE: To set the goal for an individual map, use the ``setGoal()``
+function. This requires the name of the task map and a Eigen vector
+containing the Cartesian coordinates of the goal:
+</pre></div>
+</div>
+<p>```C++ Eigen::VectorXd goal(3);</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">goal</span> <span class="o">&lt;&lt;</span> <span class="mf">0.6</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.5</span><span class="p">;</span>
+
+<span class="n">my_problem</span><span class="o">-&gt;</span><span class="n">setGoal</span><span class="p">(</span><span class="s2">&quot;Position&quot;</span><span class="p">,</span><span class="n">goal</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>``` &gt; See more about goal setting in the individual problem pages.</p>
+<p>Now the initial joint positions have been set, we have the solution
+container and have set the goal, we are ready to solve the problem using
+the <code class="docutils literal"><span class="pre">any_solver</span></code> container in which we stored the generic solver in
+earlier and passing the initial joint states <code class="docutils literal"><span class="pre">q</span></code> and the trajectory
+holder:</p>
+<div class="code c++ highlight-default"><div class="highlight"><pre><span></span><span class="n">any_solver</span><span class="o">-&gt;</span><span class="n">Solve</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">solution</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="section" id="solution-format">
+<h3>Solution Format<a class="headerlink" href="#solution-format" title="Permalink to this headline">¶</a></h3>
+<p>Now we have a solution to our problem. But what does it look like?</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="n">INFO</span><span class="p">]</span> <span class="p">[</span><span class="mf">1501240815.111167097</span><span class="p">]:</span> <span class="n">Finished</span> <span class="n">solving</span> <span class="ow">in</span> <span class="mf">3.085e-05</span><span class="n">s</span><span class="o">.</span> <span class="n">Solution</span> <span class="p">[</span>  <span class="o">-</span><span class="mf">0.109557</span>   <span class="o">-</span><span class="mf">0.653855</span>  <span class="o">-</span><span class="mf">0.0687444</span>     <span class="mf">1.28515</span> <span class="mf">1.06079e-17</span>           <span class="mi">0</span>           <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>When using the IK_solver, as in this tutorial and we set the MaxIt to a
+high number, we get single solutions to the IK problem, as shown above.
+This is a print out of the kind of thing you would see if you run this
+tutorial. This is a vector of angles, one entry for each joint in our
+robot. Each entry a joint configuration in radians, which will result in
+the end effector reaching the desired target.</p>
+<p>When using other problems or a different configuration of the
+<code class="docutils literal"><span class="pre">UnconstrainedEndPoseProblem</span></code>, trajectories will start to look a
+little more substantial. The matrix below shows the format of a solution
+after being solved by the <code class="docutils literal"><span class="pre">OMPLSolver</span></code>. Note that this solution was
+computed for a 6DOF robot and thus contains 6 columns. The first row
+represents the initial joint configuration, which here we set to zeros.
+The final row shows the configuration of the robot which allows the
+end-effector to reach the goal. The intermediate rows are the positional
+configurations that transfer the arm from start to end. The number of
+rows will be dependent on the distance travelled by the arm.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Solution</span><span class="p">:</span>
+   <span class="p">[</span>       <span class="mi">0</span>            <span class="mi">0</span>            <span class="mi">0</span>            <span class="mi">0</span>              <span class="mi">0</span>     <span class="mf">1.63042e-322</span>
+    <span class="mf">0.134729</span>   <span class="mf">0.00623148</span>  <span class="o">-</span><span class="mf">0.00439002</span>     <span class="o">-</span><span class="mf">0.0770144</span>   <span class="o">-</span><span class="mf">6.41669e-18</span>   <span class="mf">1.63042e-322</span>
+    <span class="mf">0.269458</span>     <span class="mf">0.012463</span>  <span class="o">-</span><span class="mf">0.00878005</span>     <span class="o">-</span><span class="mf">0.154029</span>    <span class="o">-</span><span class="mf">1.28334e-17</span>   <span class="mf">1.63042e-322</span>
+    <span class="mf">0.404187</span>    <span class="mf">0.0186944</span>   <span class="o">-</span><span class="mf">0.0131701</span>     <span class="o">-</span><span class="mf">0.231043</span>    <span class="o">-</span><span class="mf">1.92501e-17</span>   <span class="mf">1.63042e-322</span>
+    <span class="mf">0.538915</span>    <span class="mf">0.0249259</span>   <span class="o">-</span><span class="mf">0.0175601</span>     <span class="o">-</span><span class="mf">0.308058</span>    <span class="o">-</span><span class="mf">2.56668e-17</span>   <span class="mf">1.63042e-322</span>
+    <span class="mf">0.673644</span>    <span class="mf">0.0311574</span>   <span class="o">-</span><span class="mf">0.0219501</span>     <span class="o">-</span><span class="mf">0.385072</span>    <span class="o">-</span><span class="mf">3.20835e-17</span>   <span class="mf">1.63042e-322</span>
+    <span class="mf">0.808373</span>    <span class="mf">0.0373889</span>   <span class="o">-</span><span class="mf">0.0263401</span>     <span class="o">-</span><span class="mf">0.462086</span>    <span class="o">-</span><span class="mf">3.85001e-17</span>   <span class="mf">1.63042e-322</span>
+    <span class="mf">0.943102</span>    <span class="mf">0.0436204</span>   <span class="o">-</span><span class="mf">0.0307302</span>     <span class="o">-</span><span class="mf">0.539101</span>    <span class="o">-</span><span class="mf">4.49168e-17</span>   <span class="mf">1.63042e-322</span>
+     <span class="mf">1.07783</span>    <span class="mf">0.0498519</span>   <span class="o">-</span><span class="mf">0.0351202</span>     <span class="o">-</span><span class="mf">0.616115</span>    <span class="o">-</span><span class="mf">5.13335e-17</span>   <span class="mf">1.63042e-322</span>
+     <span class="mf">1.21256</span>    <span class="mf">0.0560833</span>   <span class="o">-</span><span class="mf">0.0395102</span>     <span class="o">-</span><span class="mf">0.69313</span>     <span class="o">-</span><span class="mf">5.77502e-17</span>   <span class="mf">1.63042e-322</span>
+     <span class="mf">1.34729</span>    <span class="mf">0.0623148</span>   <span class="o">-</span><span class="mf">0.0439002</span>     <span class="o">-</span><span class="mf">0.770144</span>    <span class="o">-</span><span class="mf">6.41669e-17</span>   <span class="mf">1.63042e-322</span>
+     <span class="mf">1.48202</span>    <span class="mf">0.0685463</span>   <span class="o">-</span><span class="mf">0.0482903</span>     <span class="o">-</span><span class="mf">0.847158</span>    <span class="o">-</span><span class="mf">7.05836e-17</span>   <span class="mf">1.63042e-322</span>
+     <span class="mf">1.61675</span>    <span class="mf">0.0747778</span>   <span class="o">-</span><span class="mf">0.0526803</span>     <span class="o">-</span><span class="mf">0.924173</span>    <span class="o">-</span><span class="mf">7.70003e-17</span>   <span class="mf">1.63042e-322</span>
+     <span class="mf">1.75148</span>    <span class="mf">0.0810093</span>   <span class="o">-</span><span class="mf">0.0570703</span>     <span class="o">-</span><span class="mf">1.00119</span>     <span class="o">-</span><span class="mf">8.3417e-17</span>    <span class="mf">1.63042e-322</span>
+      <span class="mf">1.8862</span>    <span class="mf">0.0872407</span>   <span class="o">-</span><span class="mf">0.0614603</span>     <span class="o">-</span><span class="mf">1.0782</span>      <span class="o">-</span><span class="mf">8.98337e-17</span>   <span class="mf">1.63042e-322</span>
+     <span class="mf">2.02093</span>    <span class="mf">0.0934722</span>   <span class="o">-</span><span class="mf">0.0658504</span>     <span class="o">-</span><span class="mf">1.15522</span>     <span class="o">-</span><span class="mf">9.62504e-17</span>   <span class="mf">1.63042e-322</span>
+     <span class="mf">2.15566</span>    <span class="mf">0.0997037</span>   <span class="o">-</span><span class="mf">0.0702404</span>     <span class="o">-</span><span class="mf">1.23223</span>     <span class="o">-</span><span class="mf">1.02667e-16</span>   <span class="mf">1.63042e-322</span>
+     <span class="mf">2.29039</span>     <span class="mf">0.105935</span>   <span class="o">-</span><span class="mf">0.0746304</span>     <span class="o">-</span><span class="mf">1.30924</span>     <span class="o">-</span><span class="mf">1.09084e-16</span>   <span class="mf">1.63042e-322</span>
+     <span class="mf">2.42512</span>     <span class="mf">0.112167</span>   <span class="o">-</span><span class="mf">0.0790204</span>     <span class="o">-</span><span class="mf">1.38626</span>     <span class="o">-</span><span class="mf">1.155e-16</span>     <span class="mf">1.63042e-322</span>
+     <span class="mf">2.55985</span>     <span class="mf">0.118398</span>   <span class="o">-</span><span class="mf">0.0834105</span>     <span class="o">-</span><span class="mf">1.46327</span>     <span class="o">-</span><span class="mf">1.21917e-16</span>   <span class="mf">1.63042e-322</span>
+     <span class="mf">2.69458</span>      <span class="mf">0.12463</span>   <span class="o">-</span><span class="mf">0.0878005</span>     <span class="o">-</span><span class="mf">1.54029</span>     <span class="o">-</span><span class="mf">1.28334e-16</span>   <span class="mf">1.63042e-322</span> <span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="publishing-to-rviz">
+<h4>Publishing to RVIZ<a class="headerlink" href="#publishing-to-rviz" title="Permalink to this headline">¶</a></h4>
+<p>We’ve set up or problem, solver and the rest and got our motion plan.
+EXOTica has the functionality to visualize this in RVIZ, so you can see
+your plan in action. The parts of the example code we are yet to mention
+deals with this and we’ll go through it now.</p>
+<p>Once we have our solution we can move there, which means our new initial
+configuration the next time we solve the problem will be the same as the
+goal configuration of this one, so we set it as such:</p>
+<div class="code c++ highlight-default"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">solution</span><span class="o">.</span><span class="n">row</span><span class="p">(</span><span class="n">solution</span><span class="o">.</span><span class="n">rows</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>and we send this to the problem:</p>
+<div class="code c++ highlight-default"><div class="highlight"><pre><span></span><span class="n">my_problem</span><span class="o">-&gt;</span><span class="n">Update</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Now we can publish those frames to the /joint_states topic to be read
+by RVIZ:</p>
+<div class="code c++ highlight-default"><div class="highlight"><pre><span></span><span class="n">my_problem</span><span class="o">-&gt;</span><span class="n">getScene</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">getSolver</span><span class="p">()</span><span class="o">.</span><span class="n">publishFrames</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>RVIZ can either be set-up manually or via a
+<a class="reference external" href="Setting-up-ROSlaunch.html">ROSlaunch</a>
+file (recommended).</p>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Documentation.html" class="btn btn-neutral float-right" title="Documentation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Setting-up-ROSlaunch.html" class="btn btn-neutral" title="Setting up ROSlaunch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Vladimir Ivan, Yiming Yang, Wolfgang Merkt, Michael Camilleri, Sethu Vijayakumar - and contributors.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'5.0-beta1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

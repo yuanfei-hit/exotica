@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>XML Parsing &mdash; EXOTica 5.0-beta1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="EXOTica 5.0-beta1 documentation" href="index.html"/>
+        <link rel="next" title="Manual Initialisation" href="Manual-Initialisation.html"/>
+        <link rel="prev" title="XML Initialisation" href="XML.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> EXOTica
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Initialisation.html">Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Initializers.html">Initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XML.html">XML Initialisation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">XML Parsing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#code-explained">Code Explained</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Manual-Initialisation.html">Manual Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Common-Initialisation-Step.html">Common Initialisation Step</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Setting-up-ROSlaunch.html">Setting up ROSlaunch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Using-EXOTica.html">Using EXOTica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Code-Formatting.html">Code Formatting</a></li>
+<li class="toctree-l1"><a class="reference external" href="./doxygen_cpp/index.html#http://">Doxygen C++</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EXOTica</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>XML Parsing</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="xml-parsing">
+<h1>XML Parsing<a class="headerlink" href="#xml-parsing" title="Permalink to this headline">¶</a></h1>
+<p>This part of the tutorial assumes that you have completed the previous
+XML initialisation tutorial. If this is not the case, please go
+<a class="reference external" href="XML.html">back</a> and complete it first.</p>
+<p>In this section, we will create a parser in C++ to handle the XML file
+we created last time.</p>
+<p>This snippet of code shows how this is implemented in the
+<a class="reference external" href="https://github.com/openhumanoids/exotica/blob/master/examples/exotica_examples/src/xml.cpp#L1-L15">XML.cpp</a>
+file in the EXOTica examples:</p>
+<div class="code c++ highlight-default"><div class="highlight"><pre><span></span><span class="c1">#include &lt;exotica/Exotica.h&gt;</span>
+<span class="c1">#include &lt;exotica/Problems/UnconstrainedEndPoseProblem.h&gt;</span>
+
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">exotica</span><span class="p">;</span>
+
+<span class="n">void</span> <span class="n">run</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="n">ros</span><span class="p">::</span><span class="n">NodeHandle</span> <span class="n">nh_</span><span class="p">(</span><span class="s2">&quot;~&quot;</span><span class="p">);</span>
+
+    <span class="n">Initializer</span> <span class="n">solver</span><span class="p">,</span> <span class="n">problem</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="p">::</span><span class="n">string</span> <span class="n">file_name</span><span class="p">;</span>
+    <span class="n">nh_</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s2">&quot;ConfigurationFile&quot;</span><span class="p">,</span><span class="n">file_name</span><span class="p">);</span>
+
+<span class="n">XMLLoader</span><span class="p">::</span><span class="n">load</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span><span class="n">solver</span><span class="p">,</span> <span class="n">problem</span><span class="p">);</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<div class="section" id="code-explained">
+<h2>Code Explained<a class="headerlink" href="#code-explained" title="Permalink to this headline">¶</a></h2>
+<p>Within this run function, we have the <code class="docutils literal"><span class="pre">ros::nodehandle</span></code> <code class="docutils literal"><span class="pre">nh_</span></code>. We’ll
+use this to direct the parser to the XML file using <code class="docutils literal"><span class="pre">ROS</span> <span class="pre">Params</span></code> in
+the ROSLaunch file [link to ROSLaunch section].</p>
+<p>First, we’ll need some blank initialisers for the parser to fill and
+somewhere to store the name of the XML <code class="docutils literal"><span class="pre">file_name</span></code>:</p>
+<div class="code c++ highlight-default"><div class="highlight"><pre><span></span><span class="n">Initializer</span> <span class="n">solver</span><span class="p">,</span> <span class="n">problem</span><span class="p">;</span>
+
+<span class="n">std</span><span class="p">::</span><span class="n">string</span> <span class="n">file_name</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Now to grab the file name of the XML file from the ROSLaunch file. In
+this example we have used the name <code class="docutils literal"><span class="pre">ConfigurationFile</span></code> e.g.:</p>
+<div class="code xml highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">param</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ConfigurationFile&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;string&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;$(find exotica_examples)/resources/ik_solver_demo.xml&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>so we’ll extract the value under this parameter and assign it to the
+<code class="docutils literal"><span class="pre">file_name</span></code> string using the <code class="docutils literal"><span class="pre">ros::NodeHandle</span> <span class="pre">nh_</span></code>:</p>
+<div class="code c++ highlight-default"><div class="highlight"><pre><span></span><span class="n">nh_</span><span class="o">.</span><span class="n">getParam</span><span class="p">(</span><span class="s2">&quot;ConfigurationFile&quot;</span><span class="p">,</span><span class="n">file_name</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The final step now we have all the components is to feed the
+<code class="docutils literal"><span class="pre">file_name</span></code> and empty initialisers into the XML loader:</p>
+<div class="code c++ highlight-default"><div class="highlight"><pre><span></span><span class="n">XMLLoader</span><span class="p">::</span><span class="n">load</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span><span class="n">solver</span><span class="p">,</span> <span class="n">problem</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>From here, the XML loader handles everything and will extract all the
+initialisation parameters from the XML initialisation file. We’re now
+ready to move onto the final initialisation <a class="reference external" href="Common-Initialisation-Step.html">step</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Manual-Initialisation.html" class="btn btn-neutral float-right" title="Manual Initialisation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="XML.html" class="btn btn-neutral" title="XML Initialisation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Vladimir Ivan, Yiming Yang, Wolfgang Merkt, Michael Camilleri, Sethu Vijayakumar - and contributors.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'5.0-beta1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

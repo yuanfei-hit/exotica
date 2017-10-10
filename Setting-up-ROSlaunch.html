@@ -1,0 +1,357 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Setting up ROSlaunch &mdash; EXOTica 5.0-beta1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="EXOTica 5.0-beta1 documentation" href="index.html"/>
+        <link rel="next" title="Using EXOTica" href="Using-EXOTica.html"/>
+        <link rel="prev" title="Quickstart" href="Quickstart.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> EXOTica
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Initialisation.html">Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Initializers.html">Initializers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XML.html">XML Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="XML-Parsing.html">XML Parsing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Manual-Initialisation.html">Manual Initialisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Common-Initialisation-Step.html">Common Initialisation Step</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting up ROSlaunch</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#generic-roslaunch-structure">Generic ROSlaunch Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#debug-param">Debug Param</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#urdf-and-srdf-specification">URDF and SRDF specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#specify-exotica-code-location">Specify EXOTica code location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#starting-rviz">Starting RVIZ</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#xml-parameters">XML Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Using-EXOTica.html">Using EXOTica</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Documentation.html">Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Code-Formatting.html">Code Formatting</a></li>
+<li class="toctree-l1"><a class="reference external" href="./doxygen_cpp/index.html#http://">Doxygen C++</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">EXOTica</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Setting up ROSlaunch</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-roslaunch">
+<h1>Setting up ROSlaunch<a class="headerlink" href="#setting-up-roslaunch" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="generic-roslaunch-structure">
+<h2>Generic ROSlaunch Structure<a class="headerlink" href="#generic-roslaunch-structure" title="Permalink to this headline">¶</a></h2>
+<p>Using ROSlaunch to launch your EXOTica script makes directing locating
+your URDF and SRDF scripts among other things a lot easier.</p>
+<p>As we can see in the roslaunch file for the manually initialised example
+<a class="reference external" href="https://github.com/openhumanoids/exotica/blob/master/examples/exotica_examples/launch/ManualInitialization.launch">here</a>
+and seen below, there are a few essential elements to constructing a
+ROSlaunch file.</p>
+<div class="code xml highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">launch</span><span class="o">&gt;</span>
+
+  <span class="o">&lt;</span><span class="n">arg</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;debug&quot;</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;false&quot;</span> <span class="o">/&gt;</span>
+  <span class="o">&lt;</span><span class="n">arg</span> <span class="n">unless</span><span class="o">=</span><span class="s2">&quot;$(arg debug)&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;launch_prefix&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="o">/&gt;</span>
+  <span class="o">&lt;</span><span class="n">arg</span>     <span class="k">if</span><span class="o">=</span><span class="s2">&quot;$(arg debug)&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;launch_prefix&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;xterm -e gdb --args&quot;</span> <span class="o">/&gt;</span>
+
+  <span class="o">&lt;</span><span class="n">param</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;robot_description&quot;</span> <span class="n">textfile</span><span class="o">=</span><span class="s2">&quot;$(find exotica_examples)/resources/lwr_simplified.urdf&quot;</span> <span class="o">/&gt;</span>
+  <span class="o">&lt;</span><span class="n">param</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;robot_description_semantic&quot;</span> <span class="n">textfile</span><span class="o">=</span><span class="s2">&quot;$(find exotica_examples)/resources/lwr_simplified.srdf&quot;</span> <span class="o">/&gt;</span>
+
+  <span class="o">&lt;</span><span class="n">node</span> <span class="n">launch</span><span class="o">-</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;$(arg launch_prefix)&quot;</span> <span class="n">pkg</span><span class="o">=</span><span class="s2">&quot;exotica_examples&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ManualInitialization&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ExoticaManualInitializationExampleNode&quot;</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;screen&quot;</span> <span class="o">/&gt;</span>
+
+  <span class="o">&lt;</span><span class="n">node</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;rviz&quot;</span> <span class="n">pkg</span><span class="o">=</span><span class="s2">&quot;rviz&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;rviz&quot;</span> <span class="n">respawn</span><span class="o">=</span><span class="s2">&quot;false&quot;</span>  <span class="n">args</span><span class="o">=</span><span class="s2">&quot;-d $(find exotica_examples)/resources/rviz.rviz&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="n">launch</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Now we will go through the necessary components of this file.</p>
+<div class="section" id="debug-param">
+<h3>Debug Param<a class="headerlink" href="#debug-param" title="Permalink to this headline">¶</a></h3>
+<p>EXOTica looks for a ROSParam named <code class="docutils literal"><span class="pre">&quot;debug&quot;</span></code>. Here we set the default
+value to false. This can be changed according to your needs.</p>
+<div class="code xml highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">arg</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;debug&quot;</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;false&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">arg</span> <span class="n">unless</span><span class="o">=</span><span class="s2">&quot;$(arg debug)&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;launch_prefix&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">arg</span> <span class="k">if</span><span class="o">=</span><span class="s2">&quot;$(arg debug)&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;launch_prefix&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;xterm -e gdb --args&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>The line after instructs ROSlaunch to change the value of debug if we
+specify the arg name <code class="docutils literal"><span class="pre">debug</span></code> when launching the file in the terminal.
+This will look like this:</p>
+<div class="code shell highlight-default"><div class="highlight"><pre><span></span><span class="n">roslaunch</span> <span class="n">exotica_examples</span> <span class="n">ManualInitialization</span><span class="o">.</span><span class="n">launch</span> <span class="n">debug</span><span class="p">:</span><span class="o">=</span><span class="n">true</span>
+</pre></div>
+</div>
+<p>Finally, we specify the debug terminal to be launched. Here we use
+xterm, but can be switched accordingly.</p>
+</div>
+<div class="section" id="urdf-and-srdf-specification">
+<h3>URDF and SRDF specification<a class="headerlink" href="#urdf-and-srdf-specification" title="Permalink to this headline">¶</a></h3>
+<p>In the example launch file, we see two parameters specified:
+<code class="docutils literal"><span class="pre">robot_description</span></code> and <code class="docutils literal"><span class="pre">robot_description_semantic</span></code>. These are the
+locations from which EXOTica reads the file names for the URDF and SRDF
+files respectively. These parameter names are fixed and the file names
+should be attached to these exact names.</p>
+<div class="code xml highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">param</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;robot_description&quot;</span> <span class="n">textfile</span><span class="o">=</span><span class="s2">&quot;$(find exotica_examples)/resources/lwr_simplified.urdf&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="n">param</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;robot_description_semantic&quot;</span> <span class="n">textfile</span><span class="o">=</span><span class="s2">&quot;$(find exotica_examples)/resources/lwr_simplified.srdf&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>Here the file names are specified through the ROS packages in which they
+are found (<code class="docutils literal"><span class="pre">$(find</span> <span class="pre">exotica_examples)</span></code>) and then directed to the
+specific files.</p>
+<p>If your robot description files are not stored in ROS package, the
+absolute file name can also be used, though this is not recommended.
+This is done using:
+<code class="docutils literal"><span class="pre">&quot;file:///home/username/path/path/robot_name.srdf&quot;</span></code></p>
+</div>
+<div class="section" id="specify-exotica-code-location">
+<h3>Specify EXOTica code location<a class="headerlink" href="#specify-exotica-code-location" title="Permalink to this headline">¶</a></h3>
+<p>We must then direct the ROSlaunch file to EXOTica code that we made
+earlier in the tutorial.</p>
+<div class="code xml highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">node</span> <span class="n">launch</span><span class="o">-</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;$(arg launch_prefix)&quot;</span> <span class="n">pkg</span><span class="o">=</span><span class="s2">&quot;exotica_examples&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;ManualInitialization&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ExoticaManualInitializationExampleNode&quot;</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;screen&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>In order to do this, we specify the package in which you put your
+EXOTica code. Here we stored it in the <code class="docutils literal"><span class="pre">exotica_examples</span></code> package. In
+the <code class="docutils literal"><span class="pre">type</span></code> argument, we specify the name of the EXOTica code that we
+assigned to it in the <code class="docutils literal"><span class="pre">CMakeLists.txt</span></code> file. Here, we saved it under
+<code class="docutils literal"><span class="pre">ManualInitialization</span></code>, so that’s what we specify here.</p>
+<p>Finally, we specify the name for the ROS node and the output for the
+ROSlaunch file.</p>
+</div>
+<div class="section" id="starting-rviz">
+<h3>Starting RVIZ<a class="headerlink" href="#starting-rviz" title="Permalink to this headline">¶</a></h3>
+<p>We can also start RVIZ from here and direct it to a specific .rviz save
+file:</p>
+<div class="code xml highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">node</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;rviz&quot;</span> <span class="n">pkg</span><span class="o">=</span><span class="s2">&quot;rviz&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;rviz&quot;</span> <span class="n">respawn</span><span class="o">=</span><span class="s2">&quot;false&quot;</span>    <span class="n">args</span><span class="o">=</span><span class="s2">&quot;-d $(find exotica_examples)/resources/rviz.rviz&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="xml-parameters">
+<h2>XML Parameters<a class="headerlink" href="#xml-parameters" title="Permalink to this headline">¶</a></h2>
+<p>When initialising using XML, we also need to use the ROSlaunch file to
+direct EXOTica to the XML file. We can do this by altering the
+<code class="docutils literal"><span class="pre">&lt;node&gt;</span></code> section to add the params:
+<code class="docutils literal"><span class="pre">ConfigurationFile</span></code>,<code class="docutils literal"><span class="pre">Solver</span></code>,<code class="docutils literal"><span class="pre">Problem</span></code> as such:</p>
+<div class="code xml highlight-default"><div class="highlight"><pre><span></span>  <span class="o">&lt;</span><span class="n">node</span> <span class="n">launch</span><span class="o">-</span><span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;$(arg launch_prefix)&quot;</span> <span class="n">pkg</span><span class="o">=</span><span class="s2">&quot;exotica_examples&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;XMLInitialization&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ExoticaXMLInitializationExampleNode&quot;</span> <span class="n">output</span><span class="o">=</span><span class="s2">&quot;screen&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">param</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ConfigurationFile&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;string&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;$(find exotica_examples)/resources/ik_solver_demo.xml&quot;</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="n">param</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Solver&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;string&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;MySolver&quot;</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="n">param</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Problem&quot;</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;string&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;MyProblem&quot;</span> <span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="n">node</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Which will then be read by the XML initialiser in your script. Simply
+change the value of the <code class="docutils literal"><span class="pre">ConfigurationFile</span></code> parameter to set this
+parameter.</p>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Using-EXOTica.html" class="btn btn-neutral float-right" title="Using EXOTica" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Quickstart.html" class="btn btn-neutral" title="Quickstart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Vladimir Ivan, Yiming Yang, Wolfgang Merkt, Michael Camilleri, Sethu Vijayakumar - and contributors.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'5.0-beta1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
